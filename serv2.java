@@ -32,7 +32,18 @@ public class serv2
                 String str=line1.substring(index1+1,index2);
                 int number1=Integer.parseInt(str);
                 index1=line1.lastIndexOf("=");
-                str=line1.substring(index1+1,length);
+
+                if(line1.contains("HTTP"))
+                {
+                    index2=line1.indexOf("H");
+                    str=line1.substring(index1+1,index2-1);
+                }
+                else
+                {
+                    str=line1.substring(index1+1,length);
+                }
+
+                //str=line1.substring(index1+1,length);
                 int number2=Integer.parseInt(str);
                 String tosend="";
                 if(number2>0 && number1>0)
