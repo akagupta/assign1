@@ -8,7 +8,7 @@ public class serv1
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(80);
+        ServerSocket server = new ServerSocket(1267);
         //System.out.println("Listening ..............");
         
         while (true)
@@ -41,22 +41,27 @@ public class serv1
                 }
                 int number2=Integer.parseInt(str);                
                 String msg="";
-                if(number2>0 && number1>0)
-                {
+                //(number2>0 && number1>0)
+                //{
                     double x=Math.log(number1);
                     double y=Math.log(number2);
                     result=y/x;
                     msg = Double.toString(result);
-                }
-                else
-                {
-                    msg="Please enter valid inputs";
-                }                
+                //}
+                //else
+                //{
+                    //msg="Please enter valid inputs";
+                //}                
                 OutputStream os = clientSocket.getOutputStream();
                 OutputStreamWriter osw = new OutputStreamWriter(os);
                 BufferedWriter bw = new BufferedWriter(osw);
                 bw.write(msg);
                 System.out.println("Message sent to the client from server1 is "+msg);
+
+                out.write(" ");
+                out.println(msg);
+
+
                 bw.flush();               
                 clientSocket.close();
 

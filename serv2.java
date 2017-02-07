@@ -1,14 +1,16 @@
-import javax.print.DocFlavor;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.*;
+import java.lang.*;
+import javax.print.DocFlavor;
+import java.net.ServerSocket;
 
 public class serv2 
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(80);
-        //System.out.println("Listening .............");
+        ServerSocket server = new ServerSocket(1268);
+        //System.out.println("Listening ..............");
+        
         while (true)
         {
 
@@ -18,11 +20,11 @@ public class serv2
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 DataOutputStream outToClient = new DataOutputStream(clientSocket.getOutputStream());
-                PrintWriter   out = new PrintWriter(clientSocket.getOutputStream(), true);
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);                
                 String s="";
                 s=reader.readLine();
                 int length=s.length();
-                double result;                    
+                double result;                        
                 int index1=s.indexOf("=");
                 int index2=s.indexOf("&");
                 String str=s.substring(index1+1,index2);
@@ -37,25 +39,31 @@ public class serv2
                 {
                     str=s.substring(index1+1,length);
                 }
-                int number2=Integer.parseInt(str);
+                int number2=Integer.parseInt(str);                
                 String msg="";
-                if(number2>0 && number1>0)
-                {
+                //if(number2>0 && number1>0)
+                //{
                     double x=Math.log(number1);
                     double y=Math.log(number2);
-                    result=y/x;                    
+                    result=y/x;
                     msg = Double.toString(result);
-                }
-                else
-                {
-                    msg="Please enter valid inputs";
-                }         
+                    //System.out.println("msg= "+msg);
+                //}
+                //else
+                //{
+                  //  msg="Please enter valid inputs";
+                //}                
                 OutputStream os = clientSocket.getOutputStream();
                 OutputStreamWriter osw = new OutputStreamWriter(os);
                 BufferedWriter bw = new BufferedWriter(osw);
                 bw.write(msg);
-                System.out.println("Message sent to the client from server 2 is "+msg);
-                bw.flush();                
+                System.out.println("Message sent to the client from server2 is "+msg);
+
+                out.write(" ");
+                out.println(msg);
+
+
+                bw.flush();               
                 clientSocket.close();
 
             }
@@ -70,3 +78,4 @@ public class serv2
         }
     }
 }
+
