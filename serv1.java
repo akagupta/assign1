@@ -1,17 +1,16 @@
-import javax.print.DocFlavor;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.*;
 import java.lang.*;
+import javax.print.DocFlavor;
+import java.net.ServerSocket;
 
 public class serv1 
 {
     public static void main(String[] args) throws Exception
     {
         ServerSocket server = new ServerSocket(80);
-        System.out.println("Listening ..............");
-        int i = 1;
-        int serverChoose = 0;
+        //System.out.println("Listening ..............");
+        
         while (true)
         {
 
@@ -21,62 +20,44 @@ public class serv1
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 DataOutputStream outToClient = new DataOutputStream(clientSocket.getOutputStream());
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                String line="";
-                String line1 = "";
-                double result;
-                line1 = reader.readLine();
-                int length=line1.length();
-                //System.out.println(line1);
-                int index1=line1.indexOf("=");
-                int index2=line1.indexOf("&");
-                String str=line1.substring(index1+1,index2);
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);                
+                String s="";
+                s=reader.readLine();
+                int length=s.length();
+                double result;                        
+                int index1=s.indexOf("=");
+                int index2=s.indexOf("&");
+                String str=s.substring(index1+1,index2);
                 int number1=Integer.parseInt(str);
-                index1=line1.lastIndexOf("=");
-                if(line1.contains("HTTP"))
+                index1=s.lastIndexOf("=");
+                if(s.contains("HTTP"))
                 {
-                    index2=line1.indexOf("H");
-                    str=line1.substring(index1+1,index2-1);
+                    index2=s.indexOf("H");
+                    str=s.substring(index1+1,index2-1);
                 }
                 else
                 {
-                    str=line1.substring(index1+1,length);
+                    str=s.substring(index1+1,length);
                 }
-                int number2=Integer.parseInt(str);
-                String tosend="";
+                int number2=Integer.parseInt(str);                
+                String msg="";
                 if(number2>0 && number1>0)
                 {
                     double x=Math.log(number1);
                     double y=Math.log(number2);
                     result=y/x;
-                    /*if(x>0)
-                    {
-                        result=y/x;
-                    }
-                    else
-                    {
-                        result=y;
-                    }*/
-                    tosend = Double.toString(result);
+                    msg = Double.toString(result);
                 }
                 else
                 {
-                    tosend="Please enter valid inputs";
-                }
-                //result=y/x;
-                
-
-                //String tosend = "haan mil gya i m server 1";
-                 
+                    msg="Please enter valid inputs";
+                }                
                 OutputStream os = clientSocket.getOutputStream();
                 OutputStreamWriter osw = new OutputStreamWriter(os);
                 BufferedWriter bw = new BufferedWriter(osw);
-
-
-                bw.write(tosend);
-                System.out.println("Message sent to the client from server1 is "+tosend);
-                bw.flush();
-               
+                bw.write(msg);
+                System.out.println("Message sent to the client from server1 is "+msg);
+                bw.flush();               
                 clientSocket.close();
 
             }
