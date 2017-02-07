@@ -8,7 +8,7 @@ public class loadbalancer
 	public static void main(String[] args) throws Exception
 	{
 		ServerSocket server = new ServerSocket(80);
-		//System.out.println("Listening on port 1265 ....");
+		System.out.println("Listening ............");
 		int i = 1;
 		int serverChoose = 0;
 		while (true)
@@ -24,19 +24,18 @@ public class loadbalancer
 				String line="";
 				String line1 = "";
 				line1 = reader.readLine();
-				System.out.println(line1);
+				//System.out.println(line1);
 
 				while(true){
 
 					line = reader.readLine();
 					if(line.isEmpty()) break;
-					System.out.println(line);
+					//System.out.println(line);
 				}
 				int end = line1.indexOf("HTTP");
 				String fileName = line1.substring(4,end-1);
-				//System.out.println(fileName + " <-------- ");
-                //String[] servers= {"127.0.0.1","127.0.0.1"}; // temporarily changing
-                String[] servers= {"10.0.0.2","10.0.0.3"}; // temporarily changing
+				
+                String[] servers= {"10.0.0.2","10.0.0.3"}; 
                 if(serverChoose%2 == 0)
                 {
                 	Socket socket1 = new Socket(servers[serverChoose%2], 80);
@@ -50,7 +49,7 @@ public class loadbalancer
                 	serveraddr += fileName;
                 	out.println(fileName);
                 	String recv = in.readLine();
-                	System.out.println("Text received: " + recv);
+                	System.out.println("Reply from server1: " + recv);
 
                     out.println(fileName);
                 	outToClient.write("server 1");
@@ -76,7 +75,7 @@ public class loadbalancer
                      double d=Double.parseDouble(recv2);
                      d=d*2;
                      recv2=Double.toString(d);
-                	 System.out.println("Text received: " + recv2);
+                	 System.out.println("Reply from server2: " + recv2);
               	
                 	outToClient.write("server 2");
 
