@@ -8,7 +8,7 @@ public class serv1
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(1267);
+        ServerSocket server = new ServerSocket(80);
         //System.out.println("Listening ..............");
         
         while (true)
@@ -28,7 +28,7 @@ public class serv1
                 int index1=s.indexOf("=");
                 int index2=s.indexOf("&");
                 String str=s.substring(index1+1,index2);
-                int number1=Integer.parseInt(str);
+                double number1=Double.parseDouble(str);
                 index1=s.lastIndexOf("=");
                 if(s.contains("HTTP"))
                 {
@@ -39,7 +39,7 @@ public class serv1
                 {
                     str=s.substring(index1+1,length);
                 }
-                int number2=Integer.parseInt(str);                
+                double number2=Double.parseDouble(str);                
                 String msg="";
                 //(number2>0 && number1>0)
                 //{

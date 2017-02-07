@@ -4,11 +4,11 @@ import java.lang.*;
 import javax.print.DocFlavor;
 import java.net.ServerSocket;
 
-public class serv2 
+public class serve2 
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(1268);
+        ServerSocket server = new ServerSocket(80);
         //System.out.println("Listening ..............");
         
         while (true)
@@ -41,17 +41,16 @@ public class serv2
                 }
                 double number2=Double.parseDouble(str);                
                 String msg="";
-                //if(number2>0 && number1>0)
+                //(number2>0 && number1>0)
                 //{
                     double x=Math.log(number1);
                     double y=Math.log(number2);
                     result=y/x;
                     msg = Double.toString(result);
-                    //System.out.println("msg= "+msg);
                 //}
                 //else
                 //{
-                  //  msg="Please enter valid inputs";
+                    //msg="Please enter valid inputs";
                 //}                
                 OutputStream os = clientSocket.getOutputStream();
                 OutputStreamWriter osw = new OutputStreamWriter(os);
