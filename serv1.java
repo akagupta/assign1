@@ -8,7 +8,7 @@ public class serv1
 {
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(1267);
+        ServerSocket server = new ServerSocket(80);
         System.out.println("Listening on port 1267 ....");
         int i = 1;
         int serverChoose = 0;
@@ -27,7 +27,7 @@ public class serv1
                 double result;
                 line1 = reader.readLine();
                 int length=line1.length();
-                System.out.println(line1);
+                //System.out.println(line1);
                 int index1=line1.indexOf("=");
                 int index2=line1.indexOf("&");
                 String str=line1.substring(index1+1,index2);
